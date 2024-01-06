@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import TaskContext from '../TaskContext';
 
-const Task = ({ task, toggleComplete, deleteTask, editTask }) => {
+const Task = ({ task }) => {
+ const { dispatch } = useContext(TaskContext);
  const [isEditing, setIsEditing] = useState(false);
  const [newDescription, setNewDescription] = useState(task.description);
 
@@ -9,15 +11,19 @@ const Task = ({ task, toggleComplete, deleteTask, editTask }) => {
  };
 
  const handleSaveClick = () => {
- editTask(task.id, task.title, newDescription);
+ dispatch({ type: 'EDIT_TASK', payload: { id: task.id, title: task.title, description: newDescription } });
  setIsEditing(false);
+ };
+
+ const toggleComplete = () => {
+ dispatch({ type: 'TOGGLE_COMPLETE', payload: task.id });
  };
 
  return (
  <li>
- <button onClick={() => deleteTask(task.id)}>Delete</button>
+ <button onClick={() => dispatch({ type: 'DELETE_TASK', payload: task.id })}>Delete</button>
  <button onClick={handleEditClick}>{isEditing ? 'Save' : 'Edit'}</button>
- <input type="checkbox" checked={task.completed} onChange={() => toggleComplete(task.id)} />
+ <input type="checkbox" checked={task.completed} onChange={toggleComplete} />
  {task.title}
  {isEditing && <input type="text" value={newDescription} onChange={(e) => setNewDescription(e.target.value)} />}
  </li>

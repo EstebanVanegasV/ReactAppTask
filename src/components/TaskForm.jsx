@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
+import { useTaskOperations } from '../hooks/useTaskOperations';
 
-const TaskForm = ({ addTask }) => {
+const TaskForm = () => {
+ const { addTask } = useTaskOperations();
  const [title, setTitle] = useState('');
  const [description, setDescription] = useState('');
 
  const handleSubmit = (event) => {
  event.preventDefault();
- addTask(title, description);
+ addTask({ id: Date.now(), title, description, completed: false });
  setTitle('');
  setDescription('');
  };
