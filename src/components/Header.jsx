@@ -1,7 +1,11 @@
 import React from 'react';
 
 const Header = () => {
-  return <h1>Lista de Tareas</h1>;
+ return (
+   <header>
+     <h1>My React Task List</h1>
+   </header>
+ );
 };
 
 export default Header;

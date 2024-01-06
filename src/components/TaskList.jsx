@@ -1,14 +1,14 @@
 import React from 'react';
 import Task from './Task';
 
-const TaskList = ({ tasks, onToggleComplete }) => {
-  return (
-    <div>
-      {tasks.map((task) => (
-        <Task key={task.id} {...task} onToggleComplete={onToggleComplete} />
-      ))}
-    </div>
-  );
+const TaskList = ({ tasks, toggleComplete, deleteTask, editTask }) => {
+ return (
+ <ul>
+  {tasks.map((task) => (
+    <Task key={task.id} task={task} toggleComplete={toggleComplete} deleteTask={deleteTask} editTask={editTask} />
+  ))}
+ </ul>
+ );
 };
 
 export default TaskList;
