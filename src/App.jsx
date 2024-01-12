@@ -1,4 +1,5 @@
 import React from 'react';
+import { ChakraProvider } from '@chakra-ui/react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header.jsx';
 import TaskForm from './components/TaskForm.jsx';
@@ -11,19 +12,21 @@ import './App.css';
 
 const App = () => {
  return (
- <ThemeProvider>
- <TaskProvider>
- <Router>
- <Header />
- <Menu />
- <Routes>
-   <Route path="/" element={<TaskForm />} />
-   <Route path="/tareas" element={<TaskList />} />
-   <Route path="/sobre-nosotros" element={<SobreNosotros />} />
- </Routes>
- </Router>
- </TaskProvider>
- </ThemeProvider>
+  <ChakraProvider>
+  <ThemeProvider>
+   <TaskProvider>
+    <Router>
+     <Header />
+     <Menu />
+     <Routes>
+       <Route path="/" element={<TaskForm />} />
+       <Route path="/tareas" element={<TaskList />} />
+       <Route path="/sobre-nosotros" element={<SobreNosotros />} />
+     </Routes>
+    </Router>
+   </TaskProvider>
+  </ThemeProvider>
+ </ChakraProvider>
  );
 };
 
