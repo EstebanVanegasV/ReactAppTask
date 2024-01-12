@@ -1,5 +1,5 @@
 import React, { useReducer, useMemo } from 'react';
-import { TaskContext } from './TaskContext';
+import  TaskContext  from './TaskContext.jsx';
 
 const initialState = [
  { id: 1, title: 'Tarea 1', description: 'Descripción de la tarea 1', completed: false },
