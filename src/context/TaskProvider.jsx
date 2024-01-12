@@ -1,6 +1,5 @@
-import React, { createContext, useReducer } from 'react';
-
-const TaskContext = createContext();
+import React, { useReducer, useMemo } from 'react';
+import { TaskContext } from './TaskContext';
 
 const initialState = [
  { id: 1, title: 'Tarea 1', description: 'Descripción de la tarea 1', completed: false },
@@ -19,18 +18,19 @@ function taskReducer(state, action) {
  case 'EDIT_TASK':
  return state.map((task) => task.id === action.payload.id ? { ...task, ...action.payload } : task);
  default:
- throw new Error(`Unknown action: ${action.type}`);
+ console.error(`Unknown action: ${action.type}`);
+ return state;
  }
 }
 
 export function TaskProvider({ children }) {
  const [state, dispatch] = useReducer(taskReducer, initialState);
 
+ const value = useMemo(() => ({ state, dispatch }), [state, dispatch]);
+
  return (
- <TaskContext.Provider value={{ state, dispatch }}>
+ <TaskContext.Provider value={value}>
  {children}
  </TaskContext.Provider>
  );
 }
-
-export default TaskContext;
