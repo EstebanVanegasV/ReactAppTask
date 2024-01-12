@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import Task from './Task.jsx';
 import TaskContext from '../context/TaskContext.jsx';
 
 const TaskList = () => {
- const { state } = useContext(TaskContext);
+ const { state,dispatch } = useContext(TaskContext);
 
  return (
  <ul>
